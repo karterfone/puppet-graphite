@@ -26,10 +26,11 @@ class graphite::install inherits graphite::params {
   }
 
   # # Set class variables
-  $gr_pkg_provider = $::graphite::gr_pip_install ? {
-    true    => 'pip',
-    default => undef,
-  }
+  $gr_pkg_provider = pick_default($::graphite::gr_pip_provider, $::graphite::gr_pip_install ? {
+      true    => 'pip',
+      default => undef,
+    }
+  )
 
   if $::graphite::gr_manage_python_packages {
     $gr_pkg_require = $::graphite::gr_pip_install ? {

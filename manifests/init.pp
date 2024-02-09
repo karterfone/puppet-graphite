@@ -789,6 +789,7 @@ class graphite (
   $gr_django_provider                     = $::graphite::params::django_provider,
   $gr_pip_install_options                 = $::graphite::params::pip_install_options,
   $gr_pip_install                         = true,
+  $gr_pip_provider                        = 'pip',
   $gr_manage_python_packages              = true,
   $gr_python_binary                       = $::graphite::params::python_binary,
   $gr_disable_webapp_cache                = false,
