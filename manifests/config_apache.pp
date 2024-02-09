@@ -18,8 +18,8 @@ class graphite::config_apache inherits graphite::params {
   }
 
   package {
-    $::graphite::params::apache_wsgi_pkg:
-      ensure  => installed,
+    $::graphite::apache_wsgi_pkg:
+      ensure  => pick($::graphite::apache_wsgi_ver, 'latest'),
       require => Package[$::graphite::params::apache_pkg]
   }
 
@@ -31,7 +31,7 @@ class graphite::config_apache inherits graphite::params {
         exec { 'enable mod_headers':
           command => 'a2enmod headers',
           creates => '/etc/apache2/mods-enabled/headers.load',
-          require => Package[$::graphite::params::apache_wsgi_pkg],
+          require => Package[$::graphite::apache_wsgi_pkg],
           notify  => Service[$::graphite::params::apache_service_name];
         }
       }
@@ -41,7 +41,7 @@ class graphite::config_apache inherits graphite::params {
           command => 'a2dissite 000-default',
           notify  => Service[$::graphite::params::apache_service_name],
           onlyif  => 'test -f /etc/apache2/sites-enabled/000-default -o -f /etc/apache2/sites-enabled/000-default.conf',
-          require => Package[$::graphite::params::apache_wsgi_pkg],
+          require => Package[$::graphite::apache_wsgi_pkg],
         }
       }
     }
@@ -51,7 +51,7 @@ class graphite::config_apache inherits graphite::params {
         file { "${::graphite::params::apacheconf_dir}/welcome.conf":
           ensure  => absent,
           notify  => Service[$::graphite::params::apache_service_name],
-          require => Package[$::graphite::params::apache_wsgi_pkg],
+          require => Package[$::graphite::apache_wsgi_pkg],
         }
       }
     }
@@ -115,7 +115,7 @@ class graphite::config_apache inherits graphite::params {
       owner   => $::graphite::config::gr_web_user_REAL,
       require => [
         Exec['Initial django db creation'],
-        Package[$::graphite::params::apache_wsgi_pkg],
+        Package[$::graphite::apache_wsgi_pkg],
       ],
       notify  => Service[$::graphite::params::apache_service_name];
 
