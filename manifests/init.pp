@@ -644,7 +644,7 @@ class graphite (
   $gr_apache_24                           = $::graphite::params::apache_24,
   $gr_apache_noproxy                      = undef,
   $gr_apache_wsgi_pkg                     = $::graphite::params::apache_wsgi_pkg,
-  $gr_apache_wsgi_ver                     = $::graphite::params::apache_wsgi_ver,
+  $gr_apache_wsgi_ver                     = 'latest',
   $gr_django_1_4_or_less                  = false,
   $gr_django_db_engine                    = 'django.db.backends.sqlite3',
   $gr_django_db_name                      = '/opt/graphite/storage/graphite.db',
