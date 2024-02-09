@@ -18,8 +18,8 @@ class graphite::config_apache inherits graphite::params {
   }
 
   package {
-    $::graphite::apache_wsgi_pkg:
-      ensure  => pick($::graphite::apache_wsgi_ver, 'latest'),
+    $::graphite::gr_apache_wsgi_pkg:
+      ensure  => pick($::graphite::gr_apache_wsgi_ver, 'latest'),
       require => Package[$::graphite::params::apache_pkg]
   }
 
