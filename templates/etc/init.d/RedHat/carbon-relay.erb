@@ -19,6 +19,8 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
+. /usr/local/venv/graphite/bin/activate
+
 PYTHON_CMD='<%= scope.lookupvar('graphite::gr_python_binary') %> -W ignore'
 CARBON_DAEMON="relay"
 GRAPHITE_DIR="<%= scope.lookupvar('graphite::base_dir_REAL') %>"
