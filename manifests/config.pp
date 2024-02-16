@@ -82,10 +82,10 @@ class graphite::config inherits graphite::params {
     $syncdb_require = File[$local_settings_py_file]
   } else {
     # using custom directories.
-    file { "${::graphite::graphiteweb_conf_dir_REAL}/manage.py":
-      ensure => link,
-      target => "${::graphite::params::libpath}/graphite/manage.py"
-    }
+    # file { "${::graphite::graphiteweb_conf_dir_REAL}/manage.py":
+    #   ensure => link,
+    #   target => "${::graphite::params::libpath}/graphite/manage.py"
+    # }
     $local_settings_py_file = "${::graphite::graphiteweb_conf_dir_REAL}/local_settings.py"
     $syncdb_require = [File[$local_settings_py_file], File["${::graphite::graphiteweb_conf_dir_REAL}/manage.py"]]
   }
@@ -201,11 +201,11 @@ class graphite::config inherits graphite::params {
       seltype => 'httpd_sys_content_t',
       notify  => $web_server_service_notify;
 
-    "${::graphite::graphiteweb_install_lib_dir_REAL}/graphite_wsgi.py":
-      ensure  => link,
-      target  => "${::graphite::graphiteweb_conf_dir_REAL}/graphite_wsgi.py",
-      require => File["${::graphite::graphiteweb_conf_dir_REAL}/graphite_wsgi.py"],
-      notify  => $web_server_service_notify;
+    # "${::graphite::graphiteweb_install_lib_dir_REAL}/graphite_wsgi.py":
+    #   ensure  => link,
+    #   target  => "${::graphite::graphiteweb_conf_dir_REAL}/graphite_wsgi.py",
+    #   require => File["${::graphite::graphiteweb_conf_dir_REAL}/graphite_wsgi.py"],
+    #   notify  => $web_server_service_notify;
   }
 
   if $::graphite::gr_remote_user_header_name {
