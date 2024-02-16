@@ -87,7 +87,8 @@ class graphite::config inherits graphite::params {
     #   target => "${::graphite::params::libpath}/graphite/manage.py"
     # }
     $local_settings_py_file = "${::graphite::graphiteweb_conf_dir_REAL}/local_settings.py"
-    $syncdb_require = [File[$local_settings_py_file], File["${::graphite::graphiteweb_conf_dir_REAL}/manage.py"]]
+    #$syncdb_require = [File[$local_settings_py_file], File["${::graphite::graphiteweb_conf_dir_REAL}/manage.py"]]
+    $syncdb_require = File[$local_settings_py_file]
   }
 
   $carbon_conf_file = "${::graphite::carbon_conf_dir_REAL}/carbon.conf"

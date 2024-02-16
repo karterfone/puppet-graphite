@@ -19,8 +19,8 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-if [ -f /opt/graphite/bin/activate ]; then
-  . /opt/graphite/bin/activate
+if [ -f <%= scope['graphite::base_dir_REAL'] %>/bin/activate ]; then
+  . <%= scope['graphite::base_dir_REAL'] %>/bin/activate
 fi
 
 PYTHON_CMD='<%= scope.lookupvar('graphite::gr_python_binary') %> -W ignore'
