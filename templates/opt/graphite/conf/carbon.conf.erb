@@ -259,7 +259,6 @@ ENABLE_TAGS = False
 
 <%end; end -%>
 [relay]
-LOCAL_DATA_DIR = <%= scope.lookupvar('graphite::local_data_dir_REAL') %>/
 LOG_DIR = <%= scope.lookupvar('graphite::storage_dir_REAL') + '/carbon-relay' %>/
 
 <% unless [:undef, nil].include? scope.lookupvar('graphite::gr_storage_dir') -%>
