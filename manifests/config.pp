@@ -77,19 +77,21 @@ class graphite::config inherits graphite::params {
     }
   }
 
-  if $::graphite::gr_pip_install {
-    $local_settings_py_file = "${::graphite::graphiteweb_install_lib_dir_REAL}/local_settings.py"
-    $syncdb_require = File[$local_settings_py_file]
-  } else {
-    # using custom directories.
-    # file { "${::graphite::graphiteweb_conf_dir_REAL}/manage.py":
-    #   ensure => link,
-    #   target => "${::graphite::params::libpath}/graphite/manage.py"
-    # }
-    $local_settings_py_file = "${::graphite::graphiteweb_conf_dir_REAL}/local_settings.py"
-    #$syncdb_require = [File[$local_settings_py_file], File["${::graphite::graphiteweb_conf_dir_REAL}/manage.py"]]
-    $syncdb_require = File[$local_settings_py_file]
-  }
+  $local_settings_py_file = "${::graphite::graphiteweb_install_lib_dir_REAL}/local_settings.py"
+  $syncdb_require = File[$local_settings_py_file]
+  # if $::graphite::gr_pip_install {
+  #   $local_settings_py_file = "${::graphite::graphiteweb_install_lib_dir_REAL}/local_settings.py"
+  #   $syncdb_require = File[$local_settings_py_file]
+  # } else {
+  #   # using custom directories.
+  #   # file { "${::graphite::graphiteweb_conf_dir_REAL}/manage.py":
+  #   #   ensure => link,
+  #   #   target => "${::graphite::params::libpath}/graphite/manage.py"
+  #   # }
+  #   #$local_settings_py_file = "${::graphite::graphiteweb_conf_dir_REAL}/local_settings.py"
+  #   #$syncdb_require = [File[$local_settings_py_file], File["${::graphite::graphiteweb_conf_dir_REAL}/manage.py"]]
+  #   $syncdb_require = File[$local_settings_py_file]
+  # }
 
   $carbon_conf_file = "${::graphite::carbon_conf_dir_REAL}/carbon.conf"
   $graphite_web_managepy_location = $::graphite::gr_pip_install ? {
