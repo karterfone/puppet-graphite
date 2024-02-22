@@ -355,6 +355,6 @@ end
 -%>
 
 <% unless scope.lookupvar('graphite::gr_django_1_4_or_less') -%>
-# Configure static URL prefix for Django admin pages
+# Configure static URL prefix for whitenoise >=4
 STATIC_ROOT = '<%= scope['graphite::base_dir'] %>/webapp/static'
 <% end -%>
